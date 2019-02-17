@@ -1,0 +1,86 @@
+<div class="container">
+  <mat-card class="left-container" fxFlex="40">
+    <form #formRef="ngForm">
+
+      <div class="input-data">
+        <div class="area">
+          <mat-card fxFlex="row" fxLayoutAlign="space-between center">
+            <span>Add Image Library</span>
+          
+              <i class="material-icons" style='cursor:pointer;' (click)="addResourceImages()">add_circle</i>
+            
+          </mat-card>
+        </div>
+        <div>
+          <mat-list>
+            <mat-list-item *ngFor="let image of imageObj; let i = index">
+              <mat-card *ngIf="imageObj.length!=0;" style='cursor:pointer;' class="image-card text-styler textCenter" file-hover
+                (click)="showImgs(image)" fxFlex="row" fxLayoutAlign="space-between center">
+                <span > {{image.title}}</span>
+                <div fxFlex="20" class="edit-image-wrapper" >
+                  <span class="cursor-pointer-class" >
+                    <i class="material-icons" (click)="editTitle(image.title,image.index)">edit </i>
+                  </span>
+
+                  <span class="cursor-pointer-class"  (click)="removeImageLib(image)">
+                    <i class="material-icons"> delete </i>
+                  </span>
+                </div>
+
+
+                <!-- <span *ngIf="imageObj.length!=0;" (click)="editTitle(image.title,image.index)">
+                  <i style='cursor:pointer;' class="material-icons">edit </i>
+                </span> -->
+              </mat-card>
+            </mat-list-item>
+                       <div>
+            <div *ngIf="addMedia" fxFlex="row" fxLayoutAlign="space-between center">
+              <mat-form-field [floatLabel]="'never'">
+                <input matInput  class="text-styler" type="text" [(ngModel)]="title" [value]="title"  name="title" #image="ngModel" placeholder="Add Image Type..." />
+              </mat-form-field>
+              <i class="material-icons" style='cursor:pointer;' (click)="saveImage(title)"> check_circle </i>
+            </div>
+          </div>
+          </mat-list>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+
+  <mat-card fxFlex="60">
+    <mat-list *ngIf="isAdd" >
+      <mat-grid-list cols="4" rowHeight="150px">
+        <mat-grid-tile *ngFor="let file of files; let i = index" [colspan]="1" [rowspan]="1">
+          <mat-card class="image-mat-card" file-hover *ngIf="deleteDefaultImg">
+            <div class="edit-wrapper" >
+              <ng-container *ngIf="i == 0; else elseContent">
+                <span class="action-button" (click)="addTechFile()">
+                  <i class="material-icons add-media-styler"> create </i>
+                </span>
+              </ng-container>
+
+              <ng-template #elseContent>
+                <span class="action-button" (click)="uploadTechFile(file)">
+                  <i class="material-icons add-media-styler"> create </i>
+                </span>
+
+                <span class="action-button" (click)="removeTechFile(file)">
+                  <i class="material-icons"> clear </i>
+                </span>
+              </ng-template>
+            </div>
+              <img class="image-styler" mat-card-image [src]="file.filePath"  (click)="imagePreview(file.filePath)" />
+          </mat-card>
+          <input [id]="file.index == undefined ? 'add-image' : file.index" #techniqueFileRef [name]="file.uniqueId"
+            style="display: none" class="input" type="file" (click)="triggerTechFileUpload($event, file.uniqueId)" />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-list>
+
+  </mat-card>
+
+</div>
+<div class='save-button'>
+  <button mat-raised-button class="jumbo-button m-pointer" *ngIf="isSave" (click)="saveResource()">Save</button>
+  <button mat-raised-button class="jumbo-button m-pointer" *ngIf="!isSave" (click)="updateResource()">Update</button>
+</div>

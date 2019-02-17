@@ -1,0 +1,20 @@
+<div class="add-application-container">
+    <span class="main-header">Home/Application</span>
+    <div class="tab-container">
+        <mat-tab-group class="main-tab-group">
+            <mat-tab label="Application Details" style="background-color: aqua">
+                <app-application-details></app-application-details>
+            </mat-tab>
+            <mat-tab label="Tips & Pearls" style="background-color: aqua" *ngIf="isEdit">
+                <app-tips-pearl></app-tips-pearl>
+            </mat-tab>
+            <mat-tab label="Resources" *ngIf="isEdit">
+                <app-resource></app-resource>
+            </mat-tab>
+            <!-- <mat-tab label="Calculator" *ngIf="isEdit"> Calculator Content </mat-tab> -->
+            <mat-tab label="References" *ngIf="isEdit" > 
+                <div style="padding: 10px 20px !important"> References Content</div> </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+

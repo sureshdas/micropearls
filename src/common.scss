@@ -1,0 +1,383 @@
+@import "src/variables";
+
+.main-header {
+  display: flex;
+  padding: 5px;
+}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  .label-container {
+    width: 30%;
+    font-size: 15px;
+    display: inline-block;
+
+    .label::first-letter {
+      text-transform: lowercase !important;
+    }
+
+    .label::first-letter {
+      color: green !important;
+      text-transform: uppercase !important;
+    }
+  }
+
+  .field-container {
+    width: 70%;
+    display: inline-block;
+  }
+}
+
+.media-container {
+  // padding: 40px 40px;
+  font-size: 15px;
+
+  .media-upload {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    overflow: hidden;
+
+    input {
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.add-button {
+  background-color: rgb(0, 82, 149);
+  color: white;
+  height: 40px;
+}
+
+.main-tab-group {
+  background-color: white;
+  height: 90%;
+
+  .mat-tab-body-wrapper {
+    height: 100%;
+  }
+
+  mat-tab-header {
+    .mat-tab-label-container {
+      .mat-tab-list {
+        .mat-tab-labels {
+          background-color: rgb(0, 82, 149);
+
+          .mat-tab-label-content {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.input-container.small-width {
+  width: 35%;
+}
+
+.editor-header {
+  display: flex;
+  padding: 20px 0px 10px;
+  font-size: 15px !important;
+}
+
+// .text-editor {
+//   // padding: 0px 20px 20px;
+//   min-width: 0px;
+//   height: 100%;
+
+//   // ::ng-deep {
+//   app-ngx-editor {
+//     .ngx-editor {
+//       .ngx-wrapper {
+//         .ngx-editor-textarea {
+//           max-height: 150px;
+//         }
+//       }
+//     }
+//   }
+// }
+
+
+
+::ng-deep.app-text-editor {
+  padding: 0px 20px 20px;
+  min-width: 0px;
+  height: 100%;
+
+  // ::ng-deep {
+  app-ngx-editor {
+    .ngx-editor {
+      .ngx-wrapper {
+        .ngx-editor-textarea {
+          min-height: 35vh !important;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .mat-card .mat-divider-horizontal {
+  position: relative !important;
+}
+
+::ng-deep .app-text-editor {
+  width: 100%;
+}
+
+::ng-deep .mat-list-base .mat-list-item .mat-list-item-content,
+.mat-list-base .mat-list-option .mat-list-item-content {
+  height: 100%;
+}
+
+
+
+::ng-deep .ngx-toolbar {
+  width: 70%;
+}
+
+.errortxt {
+  font-size: 12px;
+  color: red;
+}
+
+.jumbo-button {
+  margin: 10px !important;
+  background: rgb(0, 82, 149); // opacity: 0.8 !important;
+  color: $white !important;
+  padding: 0px 30px !important; // margin-left: 20px !important;
+}
+
+.save-button {
+  display: flex;
+  position: absolute;
+  right: 30px;
+  bottom: 10px;
+  color:white;
+}
+
+.table-container {
+  margin-top: 20px;
+
+  mat-header-row {
+    background: $primary;
+
+    mat-header-cell {
+      color: white;
+      // font-weight: bold;
+      font-size: 1em;
+    }
+  }
+
+  mat-row:nth-child(odd) {
+    background: rgba(201, 201, 201, 0.1);
+  }
+
+  mat-row:hover {
+    background: rgb(223, 225, 226);
+  }
+
+  .table-icon {
+    padding: 5px;
+    color: $black;
+  }
+
+  mat-cell {
+    padding: 0 5px 0 0 !important;
+  }
+}
+
+.light-red {
+  color: rgb(0, 82, 149) !important;
+}
+
+.mat-chip {
+  background: $primary !important;
+  color: $white !important;
+  cursor: pointer !important;
+}
+
+.table-header {
+  margin: auto;
+}
+
+.mat-header-cell {
+  .mat-sort-header-button {
+    margin: auto;
+  }
+}
+
+.row {
+  // used to show to line of input fields. if no padding the input fields underline is invisible
+  padding: 2px 0;
+}
+
+.description-row {
+  margin: 20px 0 10px 0;
+}
+
+mat-form-field {
+  // mat input container
+  width: 70%;
+  color: $primary;
+}
+
+.data-message {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 4em;
+  opacity: 0.7;
+  color: $black;
+  font-weight: bold;
+}
+
+.label-icon {
+  color: $primary;
+}
+
+.control-icons {
+  // used in filters page (for., create, edit, delete)
+  padding: 5px;
+
+  &:hover {
+    background: $header-grey;
+  }
+}
+
+.cross-icon {
+  padding: 2px 5px;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    background: rgb(89, 12, 14);
+  }
+}
+
+textarea,
+input {
+  color: $black !important;
+}
+
+.button-active {
+  background: $header-grey !important;
+  border-bottom: 2px solid $primary !important;
+  font-weight: bold !important;
+}
+
+.custom-input-padding {
+  padding: 15px 0;
+}
+
+// button status in tables.
+// used in users and clubs
+.inactive {
+  background: none;
+  color: rgb(0, 82, 149);
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.active {
+  background: none;
+  color: rgb(233, 53, 53);
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+.mat-raised-button {
+  min-width: 0px !important;
+  margin-left: 20px !important;
+  background: rgb(0, 82, 149);
+}
+
+.childContainer {
+  height: 90%;
+}
+
+.separator-class {
+  height: 100%;
+  width: 2%;
+  background: #ffffff;
+}
+
+mat-list {
+  height: 100%;
+}
+
+.text-styler {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 11px;
+}
+
+.add-media-styler{
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 24px;
+}
+
+.action-button {
+  cursor: pointer;
+}
+
+// .image-mat-card {
+//   height: 95%;
+//   position: relative;
+// }
+
+.image-mat-card:hover .edit-wrapper {
+  display: block;
+}
+
+.edit-wrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+.full-space {
+  width: 100%;
+  height: 100%;
+}
+
+.cursor-pointer-class {
+  cursor: pointer;
+}
+.background-color {
+  color: white;
+}
+
+// ::ng-deep mat-header-cell {
+// .mat-sort-header-container {
+// .mat-sort-header-button {
+// .center-align {
+// display: flex;
+// justify-content: center;
+// }
+// }
+// }
+// }
+
+.center-align {
+  display: flex;
+  justify-content: center;
+}
+* {
+  font-family: "Fira Sans";
+}
+
+.video-card {
+  height: 30px !important;
+  width: 100%;
+}

@@ -1,0 +1,361 @@
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+  ViewChildren,
+  QueryList
+} from '@angular/core';
+import { ResourceService } from '../resource.service';
+import { take } from 'rxjs/operators';
+import { MediaService } from '@app/media.service';
+import { HomeService } from '@app/application/application.service';
+import { Router } from '@angular/router';
+@Component({
+  selector: 'app-resource-video',
+  templateUrl: './resource-video.component.html',
+  styleUrls: ['./resource-video.component.scss']
+})
+export class ResourceVideoComponent implements OnInit {
+  @ViewChildren('techniqueFileRef') techniqueFileRef: QueryList<ElementRef>;
+  files: any[] = [{ filePath: 'assets/no-image.png' }];
+  isAdd: Boolean = false;
+  isEdit: Boolean = false;
+  resourceType = 'Video';
+  editTechniqueOnHover: Boolean = false;
+  selectedInputRef: ElementRef;
+  uniqueId: string;
+  applicationId = '';
+  isSave: Boolean = false;
+  // isComponent: Boolean = false;
+  videoObj: any = [
+  ];
+  i = 0;
+  title = '';
+  imageData: Boolean;
+  index: number;
+  Obj: any = {
+    applicationDetailId: '',
+    data: this.videoObj
+  };
+  constructor(
+    public resourceService: ResourceService,
+    private mediaService: MediaService,
+    private homeService: HomeService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    if (this.router.url !== '/addApplication') {
+      this.getResources();
+    }
+  }
+
+  // FileImageUpload(e: any) {
+  //   console.log('image', e);
+  //   const files = e.target.files;
+  //   const f = files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = (file => {
+  //     return (res: any) => {
+  //       this.files.push(res.currentTarget.result);
+  //       if (res.currentTarget.result) {
+  //         this.imageData = true;
+  //       } else {
+  //         this.imageData = false;
+  //       }
+  //     };
+  //   })(f);
+  //   reader.readAsDataURL(f);
+  // }
+  handleFileImageUpload(e: any) {
+    // console.log('image', e);
+    const files = e.target.files;
+    const f = files[0];
+    const reader = new FileReader();
+    reader.onload = (file => {
+      return (res: any) => {
+        this.mediaService
+          .uploadMedia(res.currentTarget.result)
+          .pipe(take(1))
+          .subscribe((e: any) => {
+            // console.log('result of resource image  ::', e);
+            // const arr = [];
+            this.files.push(e);
+            // console.log("Array:::", this.files);
+          });
+        if (res.currentTarget.result) {
+          this.imageData = true;
+        } else {
+          this.imageData = false;
+        }
+      };
+    })(f);
+    reader.readAsDataURL(f);
+  }
+  returnTech(data: any) {
+    this.isAdd = false;
+    // console.log('data::', data);
+    // for (let i = 0; i < data.media.length; i++) {
+    //   data.media[i].filePath = "http://192.168.1.152:8080" + data.maedia[i].filePath;
+    // }this.videoObj()
+    // console.log("data.media", data.media);
+    this.files = data.media;
+
+    // this.files.unshift({ filePath: 'assets/no-image.png' });
+    // this.files = this.files.map((el: any) => {
+    //   el.filePath.unshift();
+    //   return {
+    //     ...el,
+    //   };
+    // });
+  }
+  addTechniques() {
+    this.isAdd = true;
+    this.title = '';
+    this.files = [{ filePath: 'assets/no-image.png' }];
+  }
+  saveVideo(name: string) {
+    // console.log('name::::', name);
+    this.isAdd = false;
+    if (this.title != '') {
+      this.videoObj.push({
+        status: false,
+        title: this.title,
+        index: this.i,
+        resourceType: this.resourceType,
+        media: this.files
+      });
+      this.i++;
+      console.log("media", this.videoObj);
+      // let responseObj = JSON.stringify(this.videoObj.media);
+      // console.log("responseObj", responseObj)
+      // this.mediaService
+      //   .updateMedia(responseObj)
+      //   .pipe(take(1))
+      //   .subscribe((e: any) => {
+      //     console.log('result of updatefiles ::', e);
+      //   });
+    // } else {
+    //   for (let i = 0; i < this.videoObj.length; i++) {
+    //     if (this.videoObj[i].index == this.index) {
+    //       this.videoObj[i].title = name;
+    //       this.videoObj[i].media = this.files;
+    //       this.videoObj[i].status = false;
+    //       // console.log('edited video obj', this.videoObj);
+    //     }
+    //   }
+    //   this.isEdit = false;
+    }
+
+    this.title = '';
+    this.files = [];
+  }
+  editTitle(index: number) {
+    // console.log("edited name", name);
+    // console.log("edited index", index);
+    this.videoObj[index].status = true;
+    console.log("this.videoObj", this.videoObj[index]);
+    this.files=this.videoObj[index].media;
+    // this.isAdd = true;
+    // this.isEdit = true;
+    // this.index = index;
+    // this.title = name;
+  }
+  updateVideo(index: number){
+    this.videoObj[index].status = false;
+    this.videoObj[index].media=this.files;
+    console.log(this.videoObj); 
+  }
+  saveResource() {
+    this.videoObj = this.videoObj.map((el: any) => {
+      el.media.shift();
+      return {
+        ...el
+      };
+    });
+    this.Obj.data = this.videoObj;
+
+    // console.log("test:::", this.Obj)
+    // let responseObj = JSON.stringify(this.Obj);
+
+    this.resourceService
+      .saveResourceData(this.Obj)
+      .pipe(take(1))
+      .subscribe((e: any) => {
+        // console.log('result of resources ::', e);
+      });
+  }
+
+  addFiles() {
+    const queryResult: ElementRef[] = this.techniqueFileRef['_results'];
+    this.selectedInputRef = queryResult[0];
+    this.selectedInputRef.nativeElement.click();
+  }
+
+  /**UPDATES A FILE/ */
+  uploadFiles(file: any) {
+    console.log('file', file);
+    const queryResult: ElementRef[] = this.techniqueFileRef['_results'];
+
+    for (let i = 0; i < queryResult.length; i++) {
+      if (queryResult[i].nativeElement.name === file.uniqueId) {
+        this.selectedInputRef = queryResult[i];
+        this.selectedInputRef.nativeElement.click();
+        break;
+      }
+    }
+  }
+
+  // /**REMOVES A FILE. */
+  // removeTechFile(file: any) {
+  //   // console.log('file while removing', file);
+  //   const newFiles = [...this.newFiles];
+  //   let updatedFiles: any[] = [];
+  //   for (let i = 0; i < this.techniqueObj.techniques.length; i++) {
+  //     if (this.selectedTechnique === this.techniqueObj.techniques[i].index) {
+  //       if (
+  //         this.techniqueObj.techniques[i].files[0].filePath ===
+  //         'assets/no-image.png'
+  //       ) {
+  //         this.techniqueObj.techniques[i].files.splice(file.index + 1, 1);
+  //         updatedFiles = this.techniqueObj.techniques[i].files;
+  //       } else {
+  //         this.techniqueObj.techniques[i].files.splice(file.index, 1);
+  //         updatedFiles = newFiles.concat(this.techniqueObj.techniques[i].files);
+  //       }
+  //       // update the index after removing file
+  //       // First object will not get a index key, as it is only used for adding files
+  //       updatedFiles = updatedFiles.map((el, index: number) => {
+  //         return {
+  //           ...el,
+  //           index: index === 0 ? undefined : index - 1
+  //         };
+  //       });
+  //       this.files = updatedFiles;
+  //       if (file.uniqueId) {
+  //         this.homeService
+  //           .removeTechFiles(file.uniqueId)
+  //           .pipe(take(1))
+  //           .subscribe((res: any) => {
+  //             console.log('deleted files', res);
+  //           });
+  //       }
+  //       break;
+  //     }
+  //   }
+  // }
+  triggerTechFileUpload(event: any, uniqueId: string) {
+    this.uniqueId = uniqueId;
+    document
+      .getElementById(this.selectedInputRef.nativeElement.id)
+      .addEventListener('change', this.handleRendererChange);
+    // this.renderer.listen(this.selectedInputRef.nativeElement, 'change', this.handleRendererChange);
+  }
+
+  handleRendererChange = (ev: any) => {
+    // dispose the event after file upload is done
+    if (!this.uniqueId) {
+      this.handleFileImageUpload(ev);
+    }
+  };
+  getResources() {
+    this.homeService.currentData.pipe(take(1)).subscribe((message: any) => {
+      // console.log('message in resource video', message);
+      if (message) {
+        this.isSave = false;
+        this.Obj.applicationDetailId = message.uniqueId;
+        this.resourceService
+          .getResourceData(`${message.uniqueId}_Image`)
+          .subscribe((e: any) => {
+            // console.log('getting resourceof video  ::', e);
+            if (e.data.length == 0) {
+              this.isSave = true;
+
+              // this.videoObj = e.data;
+              // for (let i = 0; i < this.videoObj.length; i++) {
+              //   this.videoObj.obj[i].status = false;
+              // }
+            } else {
+              this.isSave = false;
+              // console.log("resources", e.data);
+              this.videoObj = e.data;
+              for (let i = 0; i < this.videoObj.length; i++) {
+                this.videoObj[i].media.unshift({
+                  filePath: 'assets/no-image.png'
+                });
+              }
+              for (let i = 0; i < this.videoObj.length; i++) {
+                this.videoObj[i].index = i;
+              }
+              this.i = this.videoObj.length;
+
+              // console.log("imageObj:::::", this.videoObj);
+            } // console.log("videoObj of resource", this.videoObj);
+          });
+      }
+    });
+  }
+  upload(type: string, fileId?: string) {
+    let inputElementRef;
+
+    inputElementRef = this.selectedInputRef.nativeElement;
+
+    // get the total amount of file attached to the file input
+    const fileCount = inputElementRef.files.length;
+    // create a new formdata instance
+    const formData = new FormData();
+    // check if filecount is greater than 0, to be sure file was selected
+    if (fileCount > 0) {
+      formData.append('pic', inputElementRef.files.item(0));
+      if (fileId) {
+        const newVideoObj = { ...this.videoObj };
+
+        this.mediaService
+          .updateMedia(formData, fileId)
+          .pipe(take(1))
+          .subscribe((res: any) => {
+            // console.log("savefiles", res)
+            for (let i = 0; i < newVideoObj.length; i++) {
+              if (newVideoObj.files[i].uniqueId === fileId) {
+                newVideoObj.media[i].filePath = res.filePath;
+                this.videoObj = newVideoObj;
+                break;
+              }
+            }
+
+            for (let i = 0; i < this.files.length; i++) {
+              if (this.files[i].uniqueId === fileId) {
+                // console.log('match found');
+                this.files[i] = res;
+                break;
+              }
+            }
+          });
+      } else {
+        this.mediaService
+          .uploadMedia(formData)
+          .pipe(take(1))
+          .subscribe((res: any) => {
+            // console.log('result of technique image  ::', res);
+            this.files.push({
+              ...res,
+              index: this.files.length // index will be used while updating or removing files
+            });
+            // for (let i = 0; i < this.videoObj.length; i++) {
+            //   if (this.videoObj[i].index === this.index) {
+            //     this.videoObj[i].media = this.files;
+            //     // this.videoObj[i].title = this.title;
+            //     break;
+            //   }
+            // }
+            // // dispose the renderer change listener
+            document
+              .getElementById(this.selectedInputRef.nativeElement.id)
+              .removeEventListener('change', this.handleRendererChange);
+          });
+      }
+    }
+  }
+}

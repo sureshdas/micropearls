@@ -1,0 +1,28 @@
+mat-dialog-content {
+  overflow: hidden;
+
+  .image-styler {
+    width: 750px;
+    height: 500px;
+  }
+
+  .video-styler {
+    width: 750px;
+    height: 480px;
+  }
+
+    
+}
+.pdf-styler{
+  overflow: auto !important;
+}
+
+mat-dialog-actions {
+  button {
+    border: 1px solid white !important;
+    background-color: white;
+    position: absolute;
+    top: 100px;
+    right: 380px; // background-color: blue;
+  }
+}

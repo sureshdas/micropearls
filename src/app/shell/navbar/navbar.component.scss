@@ -1,0 +1,43 @@
+// mat-list {
+//   // height: 50px;
+//   // background: yellow;
+// }
+
+a,
+u {
+  text-decoration: none;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+.nav-inactive {
+  color: #ffffff;
+  font-size: bold;
+  display: block;
+}
+
+.nav-active {
+  color: rgb(0, 82, 149);
+  font-size: bold;
+  display: none;
+}
+
+.menu-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px 0px;
+}
+
+.space-class {
+  width: 10px;
+}
+
+.menu-wrapper:hover .nav-active {
+  display: block;
+}
+.menu-wrapper:hover .nav-inactive {
+  display: none;
+}

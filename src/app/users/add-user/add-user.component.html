@@ -1,0 +1,117 @@
+<div class="header">Add User</div>
+
+<div>
+  <form #userform="ngForm" (ngSubmit)="userform.form.valid && onSubmit()" novalidate>
+    <div fxLayout="row">
+      <label fxFlex="20">User Name</label>
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="User Name" required #userName="ngModel" name="userName" [(ngModel)]="userModel.userName" />
+      </mat-form-field>
+
+      <div *ngIf="userform.submitted && userName.invalid" class="invalid-feedback">
+        <div *ngIf="userName.errors.required" class="text-danger">
+          User Name is required
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <label fxFlex="20">Password</label>
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="password" type="password" ng-model="password" required minlength="5" #password="ngModel"
+          name="password" [(ngModel)]="userModel.password" />
+      </mat-form-field>
+
+      <div *ngIf="userform.submitted && password.invalid" class="invalid-feedback">
+        <!-- <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger"> -->
+        <div *ngIf="password.errors.required" class="text-danger">
+          Password is required.
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <label fxFlex="20">First Name</label>
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="firstName " required #firstName="ngModel" name="firstName" [(ngModel)]="userModel.firstName" />
+      </mat-form-field>
+
+      <div *ngIf="userform.submitted && firstName.invalid" class="invalid-feedback">
+        <div *ngIf="firstName.errors.required" class="text-danger">
+          Fisrt Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <label fxFlex="20">Last Name</label>
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder=" Last Name " required #lastName="ngModel" name="lastName" [(ngModel)]="userModel.lastName" />
+      </mat-form-field>
+
+      <div *ngIf="userform.submitted && lastName.invalid" class="invalid-feedback">
+        <div *ngIf="lastName.errors.required" class="text-danger">
+          last Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <label fxFlex="20">Email</label>
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"
+          name="email" [(ngModel)]="userModel.email" />
+      </mat-form-field>
+      <div *ngIf="userform.submitted && email.invalid" class="invalid-feedback">
+        <div *ngIf="email.errors.required" class="text-danger">
+          email is required.
+        </div>
+        <div [hidden]="!email.errors?.pattern" class="text-danger">
+          Email must be a valid email address
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <label fxFlex="20">Contact Phone</label>
+      <mat-form-field fxFlex="30">
+        <span matPrefix>+1 &nbsp;</span>
+
+        <input type="tel" matInput placeholder=" Contact Phone" required minlength="10" maxlength="10" #contact="ngModel"
+          name="contact" [(ngModel)]="userModel.contact" />
+      </mat-form-field>
+
+      <div *ngIf="userform.submitted && contact.invalid" class="invalid-feedback">
+        <div *ngIf="contact.errors.required" class="text-danger">
+          Contact Phone is required.
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <label fxFlex="20">Roles</label>
+      <mat-form-field fxFlex="30">
+        <mat-select placeholder="roles" [(ngModel)]="userModel.roles" name="role" id="role" #role="ngModel" required
+          (selectionChange)="selectedRole($event)">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="role.hasError('required')">
+          <strong> Role is required</strong>
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" class="save-button">
+        <button style="font-size: 15px" ng-disabled="userform.form.$invalid" type="submit">
+          Submit
+        </button>
+        <button style="font-size: 15px" routerLink="/about" routerLinkActive="active">
+          Cancel
+        </button>
+    </div>
+  </form>
+</div>

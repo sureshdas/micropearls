@@ -1,0 +1,27 @@
+mat-tab-group {
+  mat-tab {
+    background: rgb(0, 82, 149);
+  }
+}
+
+.add-application-container {
+  background: lightgrey;
+  height: 100%;
+  width: 100%;
+  // max-height: auto;
+  padding: 20px;
+
+  .tab-container {
+    height: 99%;
+    width: 100% !important;
+  }
+}
+.container {
+  display: flex;
+}
+
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: rgb(241,178,3) !important;
+  height: 5px;
+}

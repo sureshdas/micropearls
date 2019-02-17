@@ -1,0 +1,243 @@
+<div class="panel-expansion" style="display:flex; flex-direction: column">
+
+  <mat-accordion class="accordian">
+    <mat-expansion-panel class="tips-expansion-body">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Tips & Pearls
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="main-container" fxLayout="column">
+
+        <div fxFlex="120" fxLayout="row">
+          <mat-card class="container" style="height: 100%" fxFlex="120">
+            <mat-list fxLayout="column">
+              <mat-list-item  fxFlex="20">
+                <div class="input-container">
+                  <div>
+                    <span class="label-container text-styler">Title :</span>
+
+                    <div class="field-container">
+                      <mat-form-field [floatLabel]="'never'">
+                        <input matInput [(ngModel)]="techniqueObj.tipsPearlsName" name="tipsPearlName" #tipsPearlName="ngModel" />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-list-item>
+
+              <mat-list-item style="height: 30% !important; margin:10px" fxFlex="60">
+                <div fxLayout="column">
+
+                  <div class="tips-image-editor">
+                    <div class="tips-image-header">
+                      <span class="text-styler">Tips & Pearl Image</span>
+                    </div>
+                    <mat-card class="image-mat-card" file-hover>
+                      <div class="edit-wrapper">
+                        <span class="action-button" (click)="tipsPearlsfileUpload()">
+                          <i class="material-icons"> create </i>
+                        </span>
+
+                      </div>
+                      <img class="tips-image" mat-card-image [src]="techniqueObj.tipsPearlsImage.filePath" (click)="imagePreview(techniqueObj.tipsPearlsImage.filePath)" />
+
+                      <input name="
+                    pic" style="display: none;" #tipsPearlsImageRef type="file"
+                        accept="image/*" (click)="triggerTipsPearlsImageUpload($event)" />
+                    </mat-card>
+
+                  </div>
+                </div>
+              </mat-list-item>
+
+
+            </mat-list>
+          </mat-card>
+
+          <div class="separator-class"></div>
+
+          <mat-card class="technique-wrapper" fxFlex="1200">
+            <mat-list fxLayout="column" style="overflow: auto;">
+              <mat-list-item style="height: 25%" fxFlex="20">
+                <div class="technique-list-wrapper full-space" fxLayout="column">
+
+
+
+                  <mat-list-item style="height: 30%" fxFlex="100">
+                    <div class="tips-desc-wrapper" fxLayout="column">
+                      <div class="tips-text-editor">
+                        <span class="tips-editor-header text-styler">Tips & Pearls Description</span>
+
+                        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+                          crossorigin="anonymous" />
+
+                        <ng-container>
+                          <app-ngx-editor [config]="editorConfig" [(ngModel)]="techniqueObj.description" name="desc"
+                            #desc="ngModel"></app-ngx-editor>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </mat-list-item>
+
+
+
+                </div>
+              </mat-list-item>
+
+            </mat-list>
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="add-technique" (click)="addTechnique()">
+    <span>Add Technique</span>
+    <span>
+      <i class="material-icons">add_circle</i>
+    </span>
+  </div>
+
+  <!-- *ngIf="addTechniqueExp" -->
+  <div *ngIf="addTechniqueExp" style="height: 50vh; overflow:auto; width: 100%" class="technique-expPanel-list">
+    <div style="height: 50px; width: 100%;">
+        <mat-accordion *ngFor="let technique of techniqueObj.techniques; let i = index" (click)=selectedTech(technique)>
+            <mat-expansion-panel class="tech-expansion-body"  (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"> 
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ technique.techniqueName}}
+                </mat-panel-title>
+
+                <span class="cursor-pointer-class mat-expansion-styler" matTooltip="Remove Technique" (click)="removeTechnique(technique)">
+                  <i class="material-icons"> delete </i>
+                </span>
+                
+              </mat-expansion-panel-header>
+      
+              <div class="main-container" fxLayout="column">
+                <div fxFlex="80" fxLayout="row">
+                  <mat-card class="container" fxFlex="80">
+                    <mat-list fxLayout="column">
+                      <!-- *ngIf="editTechniqueOnHover" -->
+                      <mat-list-item fxFlex="20">
+                        <div class="input-container">
+                          <div class="application-name-wrapper">
+                            <span class="label-container text-styler">Technique Step Name:</span>
+                            <div class="field-container">
+                              <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" [(ngModel)]="technique.techniqueName" placeholder="Technique name..." />
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+      
+                        <div class="cursor-pointer" style="display:flex; width:50px">
+                          <span (click)="doneTechnique()" matTooltip="Done Editing.">
+                            <i class="material-icons"> check_circle </i>
+                          </span>
+      
+                          <span (click)="cancelEditTechnique()" matTooltip="Cancel Editing.">
+                            <i class="material-icons"> cancel </i>
+                          </span>
+                        </div>
+                      </mat-list-item>
+                      <!-- *ngIf="editTechniqueOnHover" -->
+                      <mat-list-item style="height: 70%" fxFlex="60">
+                        <div class="tip-pearl-media" fxLayout="column">
+                          <div fxFlex="5"></div>
+      
+                          <span class="editor-header text-styler" fxFlex="15"  style="max-height: 25% !important;">Technique Step Media</span>
+      
+                          <div class="tips-image-container" fxFlex="75">
+                            <mat-grid-list cols="4" rowHeight="140px">
+                              <mat-grid-tile *ngFor="let file of technique.files; let i = index" [colspan]="1" [rowspan]="1">
+                                <mat-card class="image-mat-card" file-hover>
+                                  <div class="edit-wrapper">
+                                    <ng-container *ngIf="i == 0; else elseContent"> 
+                                      <span class="action-button" (click)="addTechFile()">
+                                        <i class="material-icons"> create </i>
+                                      </span>
+                                    </ng-container>
+      
+                                    <ng-template #elseContent>
+                                      <span class="action-button-create" (click)="uploadTechFile(file)">
+                                        <i class="material-icons"> create </i>
+                                      </span>
+      
+                                      <span class="action-button" (click)="removeTechFile(file)">
+                                        <i class="material-icons"> clear </i>
+                                      </span>
+                                    </ng-template>
+                                  </div>
+      
+                                  <img class="tech-image-styler" mat-card-image *ngIf="file.mediaType==='img'" [src]="sanitizer.bypassSecurityTrustUrl(file.filePath)"
+                                    (click)="imagePreview(file.filePath)" />
+      
+                                  <video id="myVideo" width="100" height="100" *ngIf="file.mediaType==='video'" (click)="imagePreview(file.filePath)">
+                                    <source [src]="sanitizer.bypassSecurityTrustUrl(file.filePath)" type="video/mp4">
+                                  </video>
+      
+                                </mat-card>
+                                <input [id]="file.index == undefined ? 'add-image' : file.index" #techniqueFileRef [name]="pic"
+                                  [title]="file.uniqueId" style="display: none" class="input" type="file" (click)="triggerTechFileUpload($event, file.uniqueId)" />
+                                  <!-- {{file | json}} -->
+                              </mat-grid-tile>
+                            </mat-grid-list>
+                          </div>
+                        </div>
+                      </mat-list-item>
+                    </mat-list>
+                  </mat-card>
+      
+                  <div class="separator-class"></div>
+      
+                  <mat-card class="technique-wrapper" fxFlex="200">
+                    <mat-list fxLayout="column">
+                      <mat-list-item style="height: 100%" fxFlex="120">
+                        <div class="technique-list-wrapper full-space" fxLayout="column">
+      
+      
+                          <!-- *ngIf="editTechniqueOnHover" -->
+                          <mat-list-item style="height: 60%;" fxFlex="40">
+                            <div class="tips-pearl-description">
+                              <div class="tech-text-editor">
+                                <span class="tech-editor-header text-styler">Technique Step Description</span>
+                                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+                                  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+                                  crossorigin="anonymous" />
+                                <ng-container>
+                                  <app-ngx-editor [config]="editorConfig" name="techniquedesc" #techniquedesc="ngModel"
+                                    [(ngModel)]="technique.description"></app-ngx-editor>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </mat-list-item>
+      
+      
+      
+                        </div>
+                      </mat-list-item>
+      
+                    </mat-list>
+                  </mat-card>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+    </div>
+   
+  </div>
+
+  <div fxFlex="10" class="save-button" >
+    <button mat-raised-button class="jumbo-button cursor-pointer-class" *ngIf="!isSave" [disabled]="!panelOpenState" (click)="saveTips()">
+      Save
+    </button>
+    <button mat-raised-button class="jumbo-button cursor-pointer-class" [disabled]="saveOneTechnique" *ngIf="isSave" [disabled]="!panelOpenState"
+      (click)="updateTips()">
+      Update
+    </button>
+  </div>
+</div>

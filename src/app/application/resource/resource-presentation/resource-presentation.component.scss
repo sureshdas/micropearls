@@ -1,0 +1,84 @@
+// .container {
+//     display: flex;
+//   }
+
+// .input-data{
+//     display: flex;
+//     flex-direction: row;
+//     margin: 30px 40px;
+// }
+// .video{
+//     padding:15px
+// }
+
+// .right-side {
+//     border: 1px solid black;
+//     margin: 10px;
+//     padding:50px;
+//   }
+
+//  .add-techniques{
+//     cursor: pointer;
+//     position: absolute;
+//     left: 479px;
+// }
+//        .left-side{
+//         border: 1px solid black;
+//         margin: 10px;
+//         padding:50px;
+//         width:700px;
+//        }
+pdf-viewer{
+  height: 100px !important;
+  width:200px !important;
+  overflow:  auto!important;
+  zoom: 1;
+}
+.main-container {
+  margin: 5px;
+}
+
+mat-card{
+  padding-top:20px !important;
+}
+
+.right-side {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.add-technique-name {
+  display: flex;
+  // align-items: center;
+  // justify-content: center;
+}
+
+.show-media {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  margin: 10px;
+}
+.image-styler {
+  height: 70px !important;
+  width:100px !important;
+  
+}
+.image-container {
+  display: flex;
+  flex-direction: row;
+  width: 750px;
+  border: 1px solid black;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.input-data {
+  display: flex;
+  flex-direction: row;
+}
+input {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  margin: 10px;
+}

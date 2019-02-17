@@ -1,0 +1,22 @@
+<mat-toolbar color="white">
+  <div>
+    <img src="assets/micropearls_logo.png" style="height: 40px;width:150px" />
+  </div>
+
+  <div fxFlex></div>
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" translate>
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <mat-list>
+        <mat-list-item>
+          <!-- <span translate>Logged in as</span>&nbsp;<b>{{ username }}</b> -->
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+      <button mat-menu-item (click)="logout()" translate>Logout</button>
+    </mat-menu>
+  </div>
+  <div></div>
+</mat-toolbar>

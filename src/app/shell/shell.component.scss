@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+mat-sidenav-container {
+  padding-top: 70px;
+  width: 100%;
+  // background: rgb(197, 202, 202);
+  background: white;
+}
+
+mat-sidenav {
+  padding-top: 70px;
+  min-width: 170px;
+  background: rgb(0, 82, 149);
+}
+.mp-content {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.mp-container {
+  overflow: hidden;
+}
+
+:host /deep/ app-dashboard {
+  // position: fixed;
+  width: 100%;
+  flex-direction: column;
+  flex-grow: "1 1 100%";
+  height: 100%;
+}
+
+:host /deep/ app-application {
+  width: 100%;
+  flex-direction: column;
+  flex-grow: "1 1 100%";
+  height: 100%;
+}
+
+::ng-deep .mat-tab-group {
+  height: 98% !important;
+}

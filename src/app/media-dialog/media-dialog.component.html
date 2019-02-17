@@ -1,0 +1,21 @@
+<mat-dialog-content>
+  <img *ngIf="showImg" class=" image-styler" [src]="data" />
+
+  <video *ngIf="showVideo" class="video-styler" controls>
+    <source [src]="data" type="video/mp4">
+  </video>
+
+</mat-dialog-content >
+
+<mat-dialog-content *ngIf="showPdf" class="pdf-styler">
+  <div >
+    <pdf-viewer   [src]="data" type="application/pdf"></pdf-viewer>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions style=' align-items: center;
+justify-content: center; padding:90px 0 10px'>
+  <!-- <button mat-button [mat-dialog-close]="true">Close</button> -->
+  <button class="action-button" [mat-dialog-close]="true">
+    <i class="material-icons"> clear </i>
+  </button>
+</mat-dialog-actions>

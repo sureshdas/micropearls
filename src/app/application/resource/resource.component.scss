@@ -1,0 +1,33 @@
+.main-container {
+  display: flex;
+}
+
+.input-data {
+  display: flex;
+  flex-direction: row;
+  margin: 30px 40px;
+}
+.video {
+  padding: 15px;
+}
+.right-side {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 50px;
+}
+
+.dropzone-list > ul {
+  width: 30%;
+  list-style: none;
+}
+.dropzone-list > ul > li:before {
+  content: "+";
+  color: #6def9a;
+}
+.dropzone-list > ul > li {
+  border: 1px solid black;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+

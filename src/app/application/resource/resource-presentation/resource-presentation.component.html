@@ -1,0 +1,58 @@
+<!-- <div class='left-side'>
+  <div>
+    <input type="file" (change)="FileImageUpload($event)">
+  </div><br>
+  <div class="image-container">
+
+    <form #formRef="ngForm">
+      <div *ngFor="let file of files; let i=index">
+        <div class="show-media">
+          <div *ngIf="imageData">
+            <img [src]="file" class="image-upload" style="width:100px; height: 100px;">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> -->
+<div class="main-container">
+ Presentations:
+  <mat-card>
+    <mat-list>
+      <mat-grid-list cols="4" rowHeight="150px">
+        <mat-grid-tile  *ngFor="let file of files; let i = index" [colspan]="1" [rowspan]="1">
+          <mat-card class="image-mat-card " file-hover>
+            <div class="edit-wrapper">
+              <ng-container *ngIf="i == 0; else elseContent">
+                <span class="action-button" (click)="addFiles()">
+                  <i class="material-icons add-media-styler"> create </i>
+                </span>
+              </ng-container>
+
+              <ng-template #elseContent>`
+                <span class="action-button" (click)="uploadFiles(file)">
+                  <i class="material-icons add-media-styler"> create </i>
+                </span>
+
+                <span class="action-button" (click)="removeFiles(file)">
+                  <i class="material-icons add-media-styler"> clear </i>
+                </span>
+              </ng-template>
+            </div>
+            <img  *ngIf="file.filePath==='assets/no-image.png'" class="image-styler" mat-card-image [src]="file.filePath" />
+            
+
+            <pdf-viewer  *ngIf="file.fileType==='pdf'" [stick-to-page]="false"  [src]="file.filePath" [page]="page" [original-size]="false" style="display: block;" (click)="documentPreview(file.filePath)"></pdf-viewer>
+          </mat-card>
+          <input [id]="file.index == undefined ? 'addPresentationFile' : file.index" #techniqueFileRef [name]='pic' [title]="file.uniqueId"
+            style="display: none" class="input" type="file" accept="application/pdf"(click)="triggerTechFileUpload($event, file.uniqueId)" />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-list>
+  </mat-card>
+</div>
+
+<div class='save-button'>
+  <button mat-raised-button class="jumbo-button m-pointer" *ngIf="isSave" (click)="saveResource()">Save</button>
+  <button mat-raised-button class="jumbo-button m-pointer" *ngIf="!isSave" (click)="updateResource()">Update</button>
+</div>

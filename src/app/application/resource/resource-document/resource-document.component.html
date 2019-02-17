@@ -1,0 +1,112 @@
+<!-- <div class='left-side'>
+  <div>
+    <input type="file" (change)="FileImageUpload($event)">
+  </div><br>
+  <div class="image-container">
+
+    <form #formRef="ngForm">
+      <div *ngFor="let file of files; let i=index">
+        <div class="show-media">
+          <div *ngIf="imageData">
+            <img [src]="file" class="image-upload" style="width:100px; height: 100px;">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+<!-- <iframe width = "555" height = "800" class="image-styler" src="assets/sample1.pdf"></iframe> -->
+<!-- <div class="main-container">
+  Application Documents:
+  <mat-card>
+    <mat-list>
+      <mat-grid-list cols="4" rowHeight="150px">
+        <mat-grid-tile *ngFor="let file of files; let i = index" [colspan]="1" [rowspan]="1">
+          <mat-card class="image-mat-card" file-hover>
+            <div class="edit-wrapper">
+              <ng-container *ngIf="i == 0; else elseContent">
+                <span class="action-button" (click)="addFiles()">
+                  <i class="material-icons"> create </i>
+                </span>
+              </ng-container>
+
+              <ng-template #elseContent>
+                <span class="action-button" (click)="uploadFiles(file)">
+                  <i class="material-icons"> create </i>
+                </span>
+                <span class="action-button" (click)="removeFiles(file)">
+                  <i class="material-icons"> clear </i>
+                </span>
+              </ng-template>
+            </div>
+            <img *ngIf="file.filePath==='assets/no-image.png'"class="image-styler" mat-card-image [src]="file.filePath" /> -->
+            <!-- <img *ngIf="file.filePath!=='assets/no-image.png'"class="image-styler" mat-card-image [src]="file.filePath" /> -->
+            <!-- <pdf-viewer style="height: 100px !important;width:100px !important"  *ngIf="file.fileType==='pdf'" class="image-styler" [stick-to-page]="true" [render-text]="true" [src]="file.filePath" (click)="documentPreview(file.filePath)"></pdf-viewer> -->
+            <!-- <div (click)="documentPreview(file.filePath)"> -->
+                <!-- <iframe *ngIf="file.fileType===pdf'" width="150" height="100" [attr.src]="sanitizer.bypassSecurityTrustResourceUrl(file.filePath)" type="application/pdf"></iframe> -->
+               <!-- <iframe *ngIf="file.fileType==='pdf'" width="150" height="100" [src]="sanitizer.bypassSecurityTrustResourceUrl(file.filePath)"  type="application/pdf" (click)="documentPreview(file.filePath)"></iframe>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -->
+            <!-- </div> -->
+           <!-- <embed [attr.src]="sanitizer.bypassSecurityTrustResourceUrl(file.filePath)" 
+            style="width: 100%;height: 100px" 
+            type="application/pdf" (click)="documentPreview(file.filePath)">  -->
+            <!-- <object *ngIf="file.fileType==='pdf'" [data]="sanitizer.bypassSecurityTrustResourceUrl(file.filePath)" width="100px" height="100px" type='application/pdf' (click)="documentPreview(file.filePath)"> 
+            </object> -->
+            <!-- (click)="documentPreview(file.filePath)" -->
+            
+            <!-- <pdf-viewer *ngIf="file.fileType==='pdf'" [src]="file.filePath" [page]="page" [original-size]="false" style="display: block;"></pdf-viewer> -->
+        <!-- <iframe width="100" height="100" [src]="sanitizer.bypassSecurityTrustResourceUrl(file.filePath)"  type="application/pdf"></iframe> -->
+          <!-- </mat-card>
+          <input [id]="file.index == undefined ? 'add-image' : file.index" #techniqueFileRef [name]="file.uniqueId"
+            style="display: none" class="input" type="file" accept="application/pdf" (click)="triggerTechFileUpload($event, file.uniqueId)" />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-list> -->
+
+  <!-- </mat-card> -->
+<!--   
+</div>
+<div class='save-button'>
+  <button mat-raised-button class="m-jumbo-button m-pointer" (click)="saveResource()">Save</button>
+</div> -->
+<div class="main-container">
+  Documents:
+  <mat-card>
+    <mat-list>
+      <mat-grid-list cols="4" rowHeight="150px">
+        <mat-grid-tile *ngFor="let file of files; let i = index" [colspan]="1" [rowspan]="1">
+          <mat-card class="image-mat-card " file-hover>
+            <div class="edit-wrapper">
+              <ng-container *ngIf="i == 0; else elseContent">
+                <span class="action-button" (click)="addFiles()">
+                  <i class="material-icons add-media-styler"> create </i>
+                </span>
+              </ng-container>
+
+              <ng-template #elseContent>
+                <span class="action-button" (click)="uploadFiles(file)">
+                  <i class="material-icons add-media-styler"> create </i>
+                </span>
+
+                <span class="action-button" (click)="removeFiles(file)">
+                  <i class="material-icons add-media-styler"> clear </i>
+                </span>
+              </ng-template>
+            </div>
+           
+            <img  *ngIf="file.filePath==='assets/no-image.png'" class="image-styler" mat-card-image [src]="file.filePath" />
+           
+            <pdf-viewer  *ngIf="file.fileType==='pdf'" [stick-to-page]="false"  [src]="file.filePath" [page]="page" [original-size]="false" style="display: block;" (click)="documentPreview(file.filePath)"></pdf-viewer>
+          </mat-card>
+          <input [id]="file.index == undefined ? 'addDocumentFile' : file.index" #techniqueFileRef [name]='pic' [title]="file.uniqueId"
+            style="display: none" class="input" type="file" accept="application/pdf"(click)="triggerTechFileUpload($event, file.uniqueId)" />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-list>
+  </mat-card>
+</div>
+
+<div class='save-button'>
+  <button mat-raised-button class="jumbo-button m-pointer" *ngIf="isSave" (click)="saveResource()">Save</button>
+  <button mat-raised-button class="jumbo-button m-pointer" *ngIf="!isSave" (click)="updateResource()">Update</button>
+</div>

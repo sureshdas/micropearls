@@ -1,0 +1,96 @@
+<div class="container">
+  <div><span class="main-header text-styler">Home/Application</span></div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between">
+
+    <div class="sidenav-search-box">
+      <div class="div-search">
+        <div class="search">
+          <span class="search-btn-wrap">
+            <button class="search-btn" type="submit">
+              <i class="material-icons">search</i>
+            </button>
+          </span>
+          <input type="text" class="searchbox" name="q" id="q" placeholder="Search" />
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="40"></div>
+
+    <div fxFlex="20" fxLayoutAlign="end">
+
+      <button class="add-button" mat-raised-button (click)="publish()">Publish</button>
+
+      <button mat-raised-button routerLink="/addApplication" class="add-button">
+        Add
+      </button>
+    </div>
+
+
+  </div>
+
+  <div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="center-align table-header" style="font-size: bold">
+          <span> Application </span>
+        </mat-header-cell>
+        <mat-cell style="cursor:pointer;text-decoration: underline;" *matCellDef="let element" class="text-styler center-align"
+          (click)="editApplication(element)">
+          {{ element.applicationName }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="desc">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="center-align table-header">
+          <span> Description </span>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let element" class="center-align text-styler">
+          <span style="max-height: 27px; overflow: hidden;">{{ element.description }}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tips">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="center-align table-header">
+          <span> Tips & Pearls </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" (click)="editpearls(rowdata)" class="center-align text-styler">
+          {{ element.tipsPearlsName }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="active">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="center-align table-header">
+          <span> Status </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index" class="center-align">
+          <button (click)="deleteApplication(element)" [class]="element.isActive ? 'inactive' : 'active'">
+            {{ getStatus(element.isActive) }}
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <mat-header-cell *matHeaderCellDef class="center-align table-header">
+          <span> Actions</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="center-align">
+          <span class="table-icon cursor-pointer-class" (click)="editApplication(element)" title="Edit">
+            <i class="material-icons"> edit </i>
+          </span>
+
+          <!-- <span class="table-icon cursor-pointer-class" (click)="deleteApplication(element)" title="Delete">
+            <i class="material-icons"> delete </i>
+          </span> -->
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator [length]="100" [pageSize]="25" [pageSizeOptions]="[10, 25, 50, 75, 100]">
+    </mat-paginator>
+  </div>
+</div>

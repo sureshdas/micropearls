@@ -1,0 +1,92 @@
+<div class="application-screen-wrapper" fxLayout="column">
+  <div class="container" fxLayout="row" fxFlex="90">
+    <mat-card fxFlex="60" class="left-column">
+      <mat-list fxLayout="column">
+        <mat-list-item style="height: 20%" fxFlex="10">
+          <div class="input-container" style="display:flex; position:relative">
+            <div class="application-name-wrapper">
+              <span class="label-container text-styler">Application Name:</span>
+              <div class="field-container">
+                <mat-form-field [floatLabel]="'never'">
+                  <input class="text-styler" matInput [(ngModel)]="applicationDetail.applicationName" name="name" #name="ngModel" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+
+        <mat-list-item style="height: 80%" fxFlex="80">
+          <div class="app-text-editor">
+            <span class="editor-header text-styler">Application Description</span>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+              crossorigin="anonymous" />
+
+            <div class="ngx-editor-wrapper">
+              <app-ngx-editor [config]="editorConfig" [(ngModel)]="applicationDetail.description" name="desc" #desc="ngModel"></app-ngx-editor>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+
+    <div class="separator-class"></div>
+
+    <mat-card fxFlex="40" class="right-column" fxLayout="column">
+      <mat-list fxLayout="column">
+        <mat-list-item style="height: 50%" fxFlex="50">
+          <mat-card class="image-mat-card" file-hover (onHoverEvent)="getFileHoverEvent($event)">
+            <div class="edit-wrapper">
+              <span class="action-button" (click)="fileUpload('appImage')">
+                <i class="material-icons add-media-styler"> create </i>
+              </span>
+
+            </div>
+
+            <mat-card-header>
+              <mat-card-subtitle class="editor-header text-styler">Application Image</mat-card-subtitle>
+            </mat-card-header>
+
+            <img class="image-styler" [src]="applicationDetail.applicationImage.filePath" (click)="imagePreview(applicationDetail.applicationImage.filePath)" />
+
+            <input id="application-image" style="display: none;" #applicationImageRef type="file" name="pic" (click)="triggerAppImageUpload($event, applicationDetail.applicationImage)" />
+            <!-- <button type="button" class="btn btn-success" (click)="upload()">
+              Upload
+            </button> -->
+          </mat-card>
+        </mat-list-item>
+
+        <mat-list-item style="height: 50%" fxFlex="50">
+          <mat-card class="image-mat-card" file-hover>
+            <div class="edit-wrapper">
+              <span class="action-button" (click)="fileUpload('appLogo')">
+                <i class="material-icons add-media-styler"> create </i>
+              </span>
+
+            </div>
+
+            <mat-card-header>
+              <mat-card-subtitle class="editor-header text-styler">Application Logo</mat-card-subtitle>
+            </mat-card-header>
+            <img class="image-styler" [src]="applicationDetail.applicationLogo.filePath" (click)="imagePreview(applicationDetail.applicationLogo.filePath)" />
+            <!-- (click)="imagePreview(applicationDetail.applicationLogo.filePath)" -->
+            <input id="application-logo" style="display: none;" #applicationLogoRef type="file" name="pic" accept="image/*"
+              (click)="triggerAppLogoUpload($event, applicationDetail.applicationLogo)" />
+          </mat-card>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+
+
+  <div class="save-button" fxFlex="10">
+    <button mat-raised-button class="
+        jumbo-button cursor-pointer-class" *ngIf="!isEdit" (click)="saveApplication()">
+      Save
+    </button>
+    <button mat-raised-button class="jumbo-button cursor-pointer-class" *ngIf="isEdit" (click)="updateApplication()">
+      Update
+    </button>
+  </div>
+</div>

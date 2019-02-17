@@ -1,0 +1,13 @@
+<ng-container>
+  <app-header-component></app-header-component>
+
+  <mat-sidenav-container class="mp-container">
+    <mat-sidenav mode="side" opened>
+      <app-navbar-component></app-navbar-component>
+    </mat-sidenav>
+
+    <mat-sidenav-content> <router-outlet></router-outlet> 
+    <!-- <app-loader *ngIf="sharedService.showLoader==='true'"></app-loader> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

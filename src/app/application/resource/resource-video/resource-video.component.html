@@ -1,0 +1,95 @@
+<div class="container">
+    <mat-card class="left-container" fxFlex="40">
+        <form #formRef="ngForm">
+    
+          <div class="input-data">
+            <div class="area">
+              <mat-card fxFlex="row" fxLayoutAlign="space-between center">
+                <span>Add Video Library</span>
+                  <i class="material-icons" style='cursor:pointer;' (click)="addVideoLib()">add_circle</i>
+              </mat-card>
+            </div>
+            <div>
+              <mat-list>
+                <mat-list-item *ngFor="let video of videoObj; let i = index">
+                  <mat-card *ngIf="videoObj.length!=0;" style='cursor:pointer;' class="video-card text-styler textCenter" file-hover
+                    (click)="showMedia(video)" fxFlex="row" fxLayoutAlign="space-between center" >
+                    <span> {{video.title}}</span>
+                   
+                    <div fxFlex="20" class="edit-video-wrapper">
+                      <span class="cursor-pointer-class" >
+                        <i class="material-icons" (click)="editTitle(video.index)">edit </i>
+                      </span>
+  
+                      <span class="cursor-pointer-class"  (click)="removeVideoLib(video)">
+                        <i class="material-icons"> delete </i>
+                      </span>
+                    </div>
+                  </mat-card>
+
+                  
+                  <div *ngIf="video.status">
+                    <mat-form-field [floatLabel] = " 'never' ">
+                      <input matInput class="text-styler" type="text" [(ngModel)]="video.title" name="video.title" value="video.title" placeholder="Add Video Type..." />
+                    </mat-form-field>
+                    <i class="material-icons" style='cursor:pointer;' (click)="updateVideo(video.index)"> check_circle </i>
+                  </div>
+
+                  <!-- <div *ngIf="updateMedia" >
+                    <i class="material-icons" style='cursor:pointer;' (click)="updateVideo(title)"> check_circle </i>
+                  </div> -->
+                </mat-list-item>
+            
+                <div>
+                <div *ngIf="addMedia" fxFlex="row" fxLayoutAlign="space-between center">
+                  <mat-form-field [floatLabel]="'never'">
+                    <input matInput  class="text-styler" type="text" [(ngModel)]="title" [value]="title"  name="title" #video="ngModel" placeholder="Add Video Type..." />
+                  </mat-form-field>
+                  <i class="material-icons" style='cursor:pointer;' (click)="saveVideo(title)"> check_circle </i>
+                </div>
+              
+              </div>
+              </mat-list>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+      <mat-card fxFlex="60">
+          <mat-list *ngIf="isAdd">
+            <mat-grid-list cols="4" rowHeight="150px">
+              <mat-grid-tile *ngFor="let file of files; let i = index" [colspan]="1" [rowspan]="1">
+                <mat-card class="image-mat-card" file-hover *ngIf="deleteDefaultImg">
+                  <div class="edit-wrapper" >
+                    <ng-container *ngIf="i == 0; else elseContent">
+                      <span class="action-button" (click)="addVideoFiles()" >
+                        <i class="material-icons add-media-styler"> create </i>
+                      </span>
+                    </ng-container>
+      
+                    <ng-template #elseContent>
+                      <span class="action-button" (click)="uploadTechFile(file)">
+                        <i class="material-icons add-media-styler"> create </i>
+                      </span>
+      
+                      <span class="action-button" (click)="removeTechFile(file)">
+                        <i class="material-icons"> clear </i>
+                      </span>
+                    </ng-template>
+                  </div>
+                    <img *ngIf="file.filePath==='assets/no-image.png'" class="image-styler" mat-card-image [src]="file.filePath" />
+                  <video *ngIf="file.fileType==='mp4'" id="myVideo" width="100" height="100" (click)="imagePreview(file.filePath)">
+                    <source [src]="file.filePath"  type="video/mp4">
+                  </video>
+                </mat-card>
+                <input [id]="file.index == undefined ? 'add-image' : file.index" #resourceVideoFileRef [name]="file.uniqueId" name="pic"
+                  style="display: none" class="input" type="file" (click)="triggerTechFileUpload($event, file.uniqueId)" />
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-list>
+      
+        </mat-card>
+</div>
+<div class='save-button'>
+  <button mat-raised-button class="jumbo-button m-pointer" *ngIf="isSave" [disabled]="hideSaveBtn" (click)="saveResource()">Save</button>
+  <button mat-raised-button class="jumbo-button m-pointer" *ngIf="!isSave"  (click)="updateResource()">Update</button>
+</div>

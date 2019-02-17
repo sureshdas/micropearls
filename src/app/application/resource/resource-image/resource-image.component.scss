@@ -1,0 +1,90 @@
+.image-card:hover .edit-image-wrapper {
+  display: block;
+}
+.edit-image-wrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+.image-card{
+  background-color: rgb(156, 57, 104) !important;
+  color: white;
+  height: 30px;
+}
+
+.tips-image-container {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+.tip-pearl-media {
+  height: 100%;
+  width: 100%;
+}
+.image-styler {
+  height: 120px;
+  padding: 4%;
+}
+.container {
+  display: flex;
+}
+
+.input-data {
+  margin: 20px 30px;
+  height: 30px;
+}
+.video {
+  width: 100%;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.add-techniques {
+  cursor: pointer;
+  position: absolute;
+  left: 335px;
+}
+.left-side {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 50px;
+  width: 700px;
+}
+.show-media {
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+}
+.image-container {
+  max-width: 600px;
+  display: flex;
+  flex-direction: row;
+
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.file-upload {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  margin-right: 18px;
+}
+.area {
+height: 30px;
+width: 100%;
+}
+.video-type {
+  height: 400px;
+}
+.left-container {
+  height: 450px;
+  overflow: auto;
+}
+.add {
+  margin: 5px;
+}
+.input{
+  width:100%;
+} 

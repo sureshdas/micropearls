@@ -1,0 +1,38 @@
+mat-toolbar {
+  height: 70px;
+  display: flex;
+  position: fixed;
+  background: #ffffff;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+@-moz-document url-prefix() {
+  mat-toolbar {
+    padding-top: 60px;
+  }
+}
+
+// ie
+// _:-ms-input-placeholder, :root .icon-wrapper {
+//     margin-top: 35px;
+// }
+// _:-ms-fullscreen, :root .icon-wrapper {
+//     margin-top: 35px;
+// }
+// IE11
+@media all and (-ms-high-contrast: none) {
+  .icon-wrapper {
+    margin-top: 35px;
+  }
+  mat-grid-tile,
+  .mat-grid-tile,
+  :host /deep/ mat-grid-tile,
+  :host /deep/ .mat-grid-tile,
+  ng-star-inserted,
+  .ng-star-inserted {
+    overflow: visible !important;
+  }
+}
